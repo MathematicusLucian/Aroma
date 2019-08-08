@@ -1,1 +1,14 @@
-<p>products works!</p>
+<div class="page-wrapper">
+
+    <p>Add a product to the basket</p>
+
+    <div fxLayout="row wrap" fxLayoutGap="16px">
+
+        <mat-card fxFlex="calc(25% - 26px)" *ngFor="let product of basket">
+            <mat-card-header>
+                <mat-card-title>{{ product.name }}</mat-card-title> 
+            </mat-card-header> 
+        </mat-card>
+    </div>
+
+</div>

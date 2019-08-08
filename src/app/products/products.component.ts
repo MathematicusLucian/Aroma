@@ -8,10 +8,13 @@ import { DataService } from '../data.service';
 })
 export class ProductsComponent implements OnInit {
 
+  basket: any;
+
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.data.getBasketContents();
+    this.basket = this.data.getBasketContents();
+    console.log(this.basket);
   }
 
 }
