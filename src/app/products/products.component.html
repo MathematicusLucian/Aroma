@@ -11,10 +11,10 @@
                 <mat-card-title>{{ product.name }}</mat-card-title> 
             </mat-card-header> 
         </mat-card>
-
+        
         <ul>
 
-            <li *ngFor="let product of basket; index as i">
+            <li *ngFor="let product of basketFiltered; index as i">
                 {{ product.quantity }} x {{ product.name }} @ {{ product.price }} 
                 <span (click)="deleteItem(i)">Del</span>
             </li>

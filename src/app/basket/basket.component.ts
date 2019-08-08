@@ -14,9 +14,9 @@ export class BasketComponent implements OnInit {
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.basket = this.data.getBasketContents(); 
+    this.basket = this.data.getBasketContents().filter(item => item.quantity > 0 ) as any; 
     this.getTotal();
-  }
+  } 
 
   getTotal(){
     this.total = this.data.getTotal();

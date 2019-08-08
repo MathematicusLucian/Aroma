@@ -9,6 +9,7 @@ import { DataService } from '../data.service';
 export class ProductsComponent implements OnInit {
 
   basket: any;
+  basketFiltered: any;
   total: any;
 
   constructor(private data: DataService) { }
@@ -30,6 +31,7 @@ export class ProductsComponent implements OnInit {
 
   getTotal(){
     this.total = this.data.getTotal();
+    this.basketFiltered = this.data.getBasketContents().filter(item => item.quantity > 0 ) as any; 
   }
 
 }
