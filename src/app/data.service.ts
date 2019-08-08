@@ -34,11 +34,11 @@ export class DataService {
 
   constructor() { } 
 
-  addProduct(id){
+  addItem(id){
     this.basket[id]["quantity"] += 1;
   }
 
-  addDelete(id){
+  deleteItem(id){
     this.basket[id]["quantity"] -= 1;
   }
 

@@ -13,8 +13,15 @@ export class ProductsComponent implements OnInit {
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.basket = this.data.getBasketContents();
-    console.log(this.basket);
+    this.basket = this.data.getBasketContents(); 
+  }
+
+  addItem(id){
+    this.data.addItem(id);
+  }
+
+  deleteItem(id){
+    this.data.deleteItem(id);
   }
 
 }

@@ -4,7 +4,9 @@
 
     <div fxLayout="row wrap" fxLayoutGap="16px">
 
-        <mat-card fxFlex="calc(25% - 26px)" *ngFor="let product of basket">
+        <mat-card *ngFor="let product of basket; index as i"
+            (click)="addItem(i)"
+            fxFlex="calc(25% - 26px)">
             <mat-card-header>
                 <mat-card-title>{{ product.name }}</mat-card-title> 
             </mat-card-header> 
