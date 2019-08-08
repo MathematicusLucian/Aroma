@@ -58,6 +58,10 @@ export class BasketComponent implements OnInit, OnDestroy {
     }
   }
 
+  public deleteItem(id){
+    this.basketService.addItem(id, -1); 
+  }
+
   public emptyBasket(): void {
     this.basketService.empty();
   }

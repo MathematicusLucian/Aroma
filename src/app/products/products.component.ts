@@ -29,10 +29,6 @@ export class ProductsComponent implements OnInit {
     this.basketService.addItem(id, 1); 
   }
 
-  public deleteItem(id){
-    this.basketService.addItem(id, -1); 
-  }
-
   public emptyBasket(): void {
     this.basketService.empty();
   }

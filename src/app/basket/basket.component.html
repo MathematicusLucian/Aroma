@@ -27,7 +27,7 @@
 
             <li *ngFor="let item of basketItems; index as i">
                 {{ item.quantity }} x {{ item.product.name }} @ {{ item.product.price | currency:currency:true }} = {{ item.subtotal | currency:currency:true }}
-                <span (click)="deleteItem(i)">Del</span>
+                <span (click)="deleteItem(item.product)">Del</span>
             </li> 
 
         </ul>
