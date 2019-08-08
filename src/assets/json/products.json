@@ -1,0 +1,26 @@
+[
+    { 
+      "id": 1,
+      "name": "Peas", 
+      "price": 0.95, 
+      "grouping": "bag" 
+    }, 
+    { 
+      "id": 2,
+      "name": "Eggs", 
+      "price": 2.10, 
+      "grouping": "dozen" 
+    },
+    { 
+      "id": 3,
+      "name": "Milk",  
+      "price": 1.30, 
+      "grouping": "bottle" 
+    },
+    {
+      "id": 4,
+      "name": "Beans", 
+      "price": 0.73, 
+      "grouping": "can" 
+    }
+  ]

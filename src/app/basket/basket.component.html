@@ -1,8 +1,16 @@
 <div class="page-wrapper">
 
-        <p>Basket</p>
+        <p>Basket</p> 
     
         <div fxLayout="row wrap" fxLayoutGap="16px">
+            {{exchangeRates}}
+            <mat-card *ngFor="let ex of exchangeRates; index as i"
+                (click)="setCurrency(i)"
+                fxFlex="calc(15% - 26px)">
+                <mat-card-header>
+                    <mat-card-title>{{ ex.base }}</mat-card-title> 
+                </mat-card-header> 
+            </mat-card> 
     
             <ul>
     

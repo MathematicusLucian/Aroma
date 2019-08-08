@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+
+import { Observable } from "rxjs/Observable";
+import { Observer } from "rxjs/Observer";
+
 import { DataService } from '../data.service'; 
+import { BasketService } from '../basket.service'; 
+import { Product } from "../models/product.model";
+import { Basket } from "../models/basket.model";
 
 @Component({
   selector: 'app-products',
@@ -8,30 +15,24 @@ import { DataService } from '../data.service';
 })
 export class ProductsComponent implements OnInit {
 
-  basket: any;
-  basketFiltered: any;
-  total: any;
+  public products: Product[]; 
 
-  constructor(private data: DataService) { }
+  constructor(private data: DataService, private basketService: BasketService) { }
 
   ngOnInit() {
-    this.basket = this.data.getBasketContents(); 
-    this.getTotal();
+    console.log(this.data.getProducts());
+    
+    this.data.getProducts().subscribe(res => this.products = res);;
   }
 
   addItem(id){
-    this.data.addItem(id); 
-    this.getTotal();
+    this.basketService.addItem(id, 1); 
   }
 
   deleteItem(id){
-    this.data.deleteItem(id);
-    this.getTotal();
+    //this.basketService.deleteItem(id, 1); 
   }
 
-  getTotal(){
-    this.total = this.data.getTotal();
-    this.basketFiltered = this.data.getBasketContents().filter(item => item.quantity > 0 ) as any; 
-  }
+  getTotal(){ }
 
 }

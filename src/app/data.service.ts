@@ -1,58 +1,43 @@
 import { Injectable } from '@angular/core';
 
+import { map } from 'rxjs/operators'; 
+import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs'; 
+
+import { HttpClient } from '@angular/common/http';
+
+import { Product } from "./models/product.model";
+import { CachingService } from "./caching.service"; 
+ 
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
+export class DataService extends CachingService {
 
-  basket = [
-    { 
-      name: "Peas", 
-      price: 0.95, 
-      type: "bag",
-      quantity: 0 
-    }, 
-    { 
-      name: "Eggs", 
-      price: 2.10, 
-      type: "dozen",
-      quantity: 0 
-    },
-    { 
-      name: "Milk",  
-      price: 1.30, 
-      type: "bottle",
-      quantity: 0  
-    },
-    {
-      name: "Beans", 
-      price: 0.73, 
-      type: "can",
-      quantity: 0 
-    }
-  ]
+  private apiUrl = 'https://api.exchangeratesapi.io/';
+  
+  private products: Observable<Product[]>; 
 
-  constructor() { } 
-
-  addItem(id){
-    this.basket[id]["quantity"] += 1;
+  public constructor(private http: HttpClient) {
+    super();
   }
 
-  deleteItem(id){
-    if(this.basket[id]["quantity"] > 0){
-      this.basket[id]["quantity"] -= 1;
-    }
-  }
+  public getProducts(): Observable<Product[]> {
 
-  getBasketContents(){ 
-    return this.basket;
-  }
+    return this.cache<Product[]>(() => this.products,
+      (val: Observable<Product[]>) => this.products = val,
+      () => this.http
+        .get("./assets/json/products.json")
+          .pipe(map((response) => response as Product[] || [])
+        )
+    );
 
-  getTotal(){
-    let total = 0;
-    this.basket.forEach(element => {
-      total += (element.quantity * element.price);
-    });
-    return total.toFixed(2);
   }
+  
+	getExchangeRate(currency): Observable<any[]> {   
+    let data = this.http.get<any[]>(this.apiUrl + 'latest?base=GBP')
+    .pipe(map(data => data["rates"][currency])); 
+    //console.log(data);
+    return data;
+  } 
 }

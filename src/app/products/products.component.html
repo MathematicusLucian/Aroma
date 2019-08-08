@@ -1,17 +1,25 @@
-<div class="page-wrapper">
+<div class="page-wrapper container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
 
-    <p>Add a product to the basket</p>
+    <div fxFlex="70%">
 
-    <div fxLayout="row wrap" fxLayoutGap="16px">
+        <p>Add a product to the basket</p>
 
-        <mat-card *ngFor="let product of basket; index as i"
-            (click)="addItem(i)"
-            fxFlex="calc(25% - 26px)">
-            <mat-card-header>
-                <mat-card-title>{{ product.name }}</mat-card-title> 
-            </mat-card-header> 
-        </mat-card>
+        <div fxLayout="row wrap" fxLayoutGap="16px">
+
+            <mat-card *ngFor="let product of products; index as i"
+                (click)="addItem(i)"
+                fxFlex="calc(25% - 26px)">
+                <mat-card-header>
+                    <mat-card-title>{{ product.name }}</mat-card-title> 
+                </mat-card-header> 
+            </mat-card>
+
+        </div>
+
+    </div>
         
+    <div fxFlex="30%">
+
         <ul>
 
             <li *ngFor="let product of basketFiltered; index as i">
@@ -21,7 +29,7 @@
 
             <li><strong>Total: {{ total }}</strong></li>
 
-        </ul>
+        </ul> 
 
     </div>
 
