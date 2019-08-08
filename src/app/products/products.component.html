@@ -2,6 +2,8 @@
 
     <p>Add a product to the basket</p>
 
+    <p>Total: {{ total }}</p>
+
     <div fxLayout="row wrap" fxLayoutGap="16px">
 
         <mat-card *ngFor="let product of basket; index as i"
