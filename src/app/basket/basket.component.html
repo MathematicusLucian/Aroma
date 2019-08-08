@@ -1,1 +1,20 @@
-<p>basket works!</p>
+<div class="page-wrapper">
+
+        <p>Basket</p>
+    
+        <div fxLayout="row wrap" fxLayoutGap="16px">
+    
+            <ul>
+    
+                <li *ngFor="let product of basket; index as i">
+                    {{ product.quantity }} x {{ product.name }} @ {{ product.price }} 
+                    <span (click)="deleteItem(i)">Del</span>
+                </li>
+    
+                <li><strong>Total: {{ total }}</strong></li>
+    
+            </ul>
+    
+        </div>
+    
+    </div>
