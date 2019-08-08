@@ -5,9 +5,9 @@ import { Observable, Observer } from "rxjs";
 import { StorageService } from "./storage.service";
 import { DataService } from "./data.service";
 
-import { BasketItem } from "./models/basket-item.model";
-import { Product } from "./models/product.model";
-import { Basket } from "./models/basket.model"; 
+import { BasketItem } from "../models/basket-item.model";
+import { Product } from "../models/product.model";
+import { Basket } from "../models/basket.model"; 
 
 const basket_KEY = "basket";
 

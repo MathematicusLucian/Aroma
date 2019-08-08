@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs/Observable";
 import { Observer } from "rxjs/Observer";
 
-import { DataService } from '../data.service'; 
-import { BasketService } from '../basket.service'; 
+import { DataService } from '../services/data.service'; 
+import { BasketService } from '../services/basket.service'; 
 import { Product } from "../models/product.model";
 import { Basket } from "../models/basket.model";
 
