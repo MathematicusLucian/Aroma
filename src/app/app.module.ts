@@ -11,9 +11,9 @@ import { FlexModule } from '@angular/flex-layout';
 import { BasketComponent } from './basket/basket.component';
 import { ProductsComponent } from './products/products.component';
 
-import { DataService } from "./data.service";
-import { BasketService } from "./basket.service"; 
-import { LocalStorageService, StorageService } from "./storage.service";
+import { DataService } from "./services/data.service";
+import { BasketService } from "./services/basket.service"; 
+import { LocalStorageService, StorageService } from "./services/storage.service";
 
 @NgModule({
   declarations: [
