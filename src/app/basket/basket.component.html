@@ -1,28 +1,37 @@
 <div class="page-wrapper">
 
-        <p>Basket</p> 
-    
-        <div fxLayout="row wrap" fxLayoutGap="16px">
-            {{exchangeRates}}
-            <mat-card *ngFor="let ex of exchangeRates; index as i"
-                (click)="setCurrency(i)"
-                fxFlex="calc(15% - 26px)">
-                <mat-card-header>
-                    <mat-card-title>{{ ex.base }}</mat-card-title> 
-                </mat-card-header> 
-            </mat-card> 
-    
-            <ul>
-    
-                <li *ngFor="let product of basket; index as i">
-                    {{ product.quantity }} x {{ product.name }} @ {{ product.price }} 
-                    <span (click)="deleteItem(i)">Del</span>
-                </li>
-    
-                <li><strong>Total: {{ total }}</strong></li>
-    
-            </ul>
-    
-        </div>
-    
+    <div fxLayout="row wrap" fxLayoutGap="16px">
+
+         <h2>Basket</h2> 
+
     </div>
+
+    <div fxLayout="row wrap" fxLayoutGap="16px">
+
+        <p>Basket Gross Total: {{(basket | async).grossTotal | currency:currency:true }}</p>
+
+    </div>
+
+    <div fxLayout="row wrap" fxLayoutGap="16px">
+        
+        {{exchangeRates}}
+        <mat-card *ngFor="let ex of exchangeRates; index as i"
+            (click)="setCurrency(i)"
+            fxFlex="calc(15% - 26px)">
+            <mat-card-header>
+                <mat-card-title>{{ ex.base }}</mat-card-title> 
+            </mat-card-header> 
+        </mat-card> 
+
+        <ul>
+
+            <li *ngFor="let item of basketItems; index as i">
+                {{ item.quantity }} x {{ item.product.name }} @ {{ item.product.price | currency:currency:true }} = {{ item.subtotal | currency:currency:true }}
+                <span (click)="deleteItem(i)">Del</span>
+            </li> 
+
+        </ul>
+
+    </div>
+
+</div>

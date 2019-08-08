@@ -7,7 +7,7 @@
         <div fxLayout="row wrap" fxLayoutGap="16px">
 
             <mat-card *ngFor="let product of products; index as i"
-                (click)="addItem(i)"
+                (click)="addItem(product)"
                 fxFlex="calc(25% - 26px)">
                 <mat-card-header>
                     <mat-card-title>{{ product.name }}</mat-card-title> 
@@ -20,11 +20,14 @@
         
     <div fxFlex="30%">
 
+        <button mat-button [routerLink]="['/basket']">View Basket</button>
+        <button mat-button (click)="emptyBasket()">Empty Basket</button>
+
         <ul>
 
             <li *ngFor="let product of basketFiltered; index as i">
                 {{ product.quantity }} x {{ product.name }} @ {{ product.price }} 
-                <span (click)="deleteItem(i)">Del</span>
+                <span (click)="deleteItem(product)">Del</span>
             </li>
 
             <li><strong>Total: {{ total }}</strong></li>

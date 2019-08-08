@@ -6,7 +6,7 @@ import { Observer } from "rxjs/Observer";
 import { DataService } from '../services/data.service'; 
 import { BasketService } from '../services/basket.service'; 
 import { Product } from "../models/product.model";
-import { Basket } from "../models/basket.model";
+import { Basket } from "../models/basket.model"; 
 
 @Component({
   selector: 'app-products',
@@ -22,7 +22,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit() {
     console.log(this.data.getProducts());
     
-    this.data.getProducts().subscribe(res => this.products = res);;
+    this.data.getProducts().subscribe(res => this.products = res);
   }
 
   addItem(id){
@@ -33,6 +33,6 @@ export class ProductsComponent implements OnInit {
     //this.basketService.deleteItem(id, 1); 
   }
 
-  getTotal(){ }
+  emptyBasket(){ }
 
 }

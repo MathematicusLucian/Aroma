@@ -56,13 +56,8 @@ export class BasketService {
     this.dispatch(basket);
   }
 
-  public empty(): void {
-    const newbasket = new Basket();
-    this.save(newbasket);
-    this.dispatch(newbasket);
-  } 
-
   private calculateBasket(basket: Basket): void {
+    console.log( basket.items);
     basket.itemsTotal = basket.items
     .map((item) => item.quantity * this.products.find((p) => p.id === item.productId).price)
     .reduce((previous, current) => previous + current, 0); 
@@ -92,4 +87,10 @@ export class BasketService {
         }
       });
   }
+
+  public empty(): void {
+    const newbasket = new Basket();
+    this.save(newbasket);
+    this.dispatch(newbasket);
+  } 
 }
