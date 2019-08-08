@@ -3,8 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { AppMaterialModule  } from './app-material.module';
+import { FlexModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -12,9 +14,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    AppRoutingModule, 
     BrowserAnimationsModule,
-    FlexLayoutModule 
+    AppMaterialModule,
+    FlexModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]
