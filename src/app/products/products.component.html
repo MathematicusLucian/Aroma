@@ -2,8 +2,6 @@
 
     <p>Add a product to the basket</p>
 
-    <p>Total: {{ total }}</p>
-
     <div fxLayout="row wrap" fxLayoutGap="16px">
 
         <mat-card *ngFor="let product of basket; index as i"
@@ -13,6 +11,18 @@
                 <mat-card-title>{{ product.name }}</mat-card-title> 
             </mat-card-header> 
         </mat-card>
+
+        <ul>
+
+            <li *ngFor="let product of basket; index as i">
+                {{ product.quantity }} x {{ product.name }} @ {{ product.price }} 
+                <span (click)="deleteItem(i)">Del</span>
+            </li>
+
+            <li><strong>Total: {{ total }}</strong></li>
+
+        </ul>
+
     </div>
 
 </div>
