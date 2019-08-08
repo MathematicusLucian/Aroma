@@ -25,9 +25,9 @@ export class BasketComponent implements OnInit, OnDestroy {
   public itemCount: number;
   private products: Product[];
   private basketSubscription: Subscription;
+  private exchangeRates: any;
   public currency: any;
-  public exchangeRate: any;
-  public exchangeRates$: Observable<any[]>;
+  public exchangeRate: any; 
   private errorMessage: any;
 
   constructor(private data: DataService, private basketService: BasketService) { 
@@ -35,18 +35,24 @@ export class BasketComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void { 
     this.currency = "GBP";
+
+    this.data.getExchangeRates().subscribe(rates => {
+      this.exchangeRates = rates["rates"];
+    }); 
+    console.log(this.exchangeRates);
+
     this.basket = this.basketService.get();
-    this.basketSubscription = this.basket.subscribe((cart) => {
-    this.itemCount = cart.items.map((x) => x.quantity).reduce((p, n) => p + n, 0);
-    this.data.getProducts().subscribe((products) => {
-      this.products = products;
-      this.basketItems = cart.items
-        .map((item) => {
-          const product = this.products.find((p) => p.id === item.productId);
-          return {
-            ...item,
-            product,
-            subtotal: product.price * item.quantity };
+    this.basketSubscription = this.basket.subscribe((basket) => {
+      this.itemCount = basket.items.map((x) => x.quantity).reduce((p, n) => p + n, 0);
+      this.data.getProducts().subscribe((products) => {
+        this.products = products;
+        this.basketItems = basket.items
+          .map((item) => {
+            const product = this.products.find((p) => p.id === item.productId);
+            return {
+              ...item,
+              product,
+              subtotal: product.price * item.quantity };
         });
       });
     });
@@ -71,7 +77,7 @@ export class BasketComponent implements OnInit, OnDestroy {
     this.errorMessage  = "ERROR : ${error}`";
   }
 
-  getExchangeRate(currency): void {
+  /* getExchangeRate(currency): void {
     this.data.getExchangeRate(currency)
       .subscribe(
         exchangeRate => {
@@ -83,10 +89,10 @@ export class BasketComponent implements OnInit, OnDestroy {
 
     console.log(this.exchangeRate); 
 
-  } 
+  } */
 
   setCurrency(currency){
-    this.getExchangeRate(currency);
+   // this.getExchangeRate(currency);
     console.log(this.exchangeRate);  
   }
 

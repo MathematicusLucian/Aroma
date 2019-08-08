@@ -3,24 +3,28 @@
       "id": 1,
       "name": "Peas", 
       "price": 0.95, 
-      "grouping": "bag" 
+      "grouping": "bag",
+      "img": "peas.jpg"
     }, 
     { 
       "id": 2,
       "name": "Eggs", 
       "price": 2.10, 
-      "grouping": "dozen" 
+      "grouping": "dozen",
+      "img": "eggs.jpg"
     },
     { 
       "id": 3,
       "name": "Milk",  
       "price": 1.30, 
-      "grouping": "bottle" 
+      "grouping": "bottle",
+      "img": "milk.jpg" 
     },
     {
       "id": 4,
       "name": "Beans", 
       "price": 0.73, 
-      "grouping": "can" 
+      "grouping": "can",
+      "img": "beans.jpg"
     }
   ]

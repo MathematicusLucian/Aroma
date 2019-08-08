@@ -8,10 +8,14 @@
 
             <mat-card *ngFor="let product of products; index as i"
                 (click)="addItem(product)"
-                fxFlex="calc(25% - 26px)">
+                fxFlex="calc(50% - 56px)">
                 <mat-card-header>
                     <mat-card-title>{{ product.name }}</mat-card-title> 
                 </mat-card-header> 
+                <div mat-card-image [style.background-image]="'url(assets/img/'+ product.img +')'"></div>  
+                <mat-card-content>
+                    {{ product.price | currency:currency:true }} per {{ product.grouping }}
+                </mat-card-content>
             </mat-card>
 
         </div>

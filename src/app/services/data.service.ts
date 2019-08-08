@@ -17,6 +17,7 @@ export class DataService extends CachingService {
   private apiUrl = 'https://api.exchangeratesapi.io/';
   
   private products: Observable<Product[]>; 
+  private exchangeRates: Observable<any[]>; 
 
   public constructor(private http: HttpClient) {
     super();
@@ -33,8 +34,20 @@ export class DataService extends CachingService {
     );
 
   }
+
+  public getExchangeRates(): Observable<any[]> {
+
+    return this.cache<any[]>(() => this.exchangeRates,
+      (val: Observable<any[]>) => this.exchangeRates = val,
+      () => this.http
+        .get(this.apiUrl + "latest?base=GBP")
+          .pipe(map((response) => response as any[] || [])
+        )
+    );
+
+  }
   
-	getExchangeRate(currency): Observable<any[]> {   
+	public getExchangeRate(currency): Observable<any[]> {   
     let data = this.http.get<any[]>(this.apiUrl + 'latest?base=GBP')
     .pipe(map(data => data["rates"][currency])); 
     //console.log(data);
