@@ -25,14 +25,16 @@ export class ProductsComponent implements OnInit {
     this.data.getProducts().subscribe(res => this.products = res);
   }
 
-  addItem(id){
+  public addItem(id){
     this.basketService.addItem(id, 1); 
   }
 
-  deleteItem(id){
-    //this.basketService.deleteItem(id, 1); 
+  public deleteItem(id){
+    this.basketService.addItem(id, -1); 
   }
 
-  emptyBasket(){ }
+  public emptyBasket(): void {
+    this.basketService.empty();
+  }
 
 }

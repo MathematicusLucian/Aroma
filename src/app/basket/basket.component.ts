@@ -7,7 +7,6 @@ import { BasketItem } from "../models/basket-item.model";
 import { Product } from "../models/product.model";
 import { DataService } from '../services/data.service'; 
 import { BasketService } from '../services/basket.service';
-import { BasketItemService } from '../services/basket-item.service';
 
 interface IBasketItem extends BasketItem {
   product: Product;
@@ -59,7 +58,7 @@ export class BasketComponent implements OnInit, OnDestroy {
     }
   }
 
-  public emptyCart(): void {
+  public emptyBasket(): void {
     this.basketService.empty();
   }
 

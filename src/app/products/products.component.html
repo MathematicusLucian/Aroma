@@ -23,16 +23,7 @@
         <button mat-button [routerLink]="['/basket']">View Basket</button>
         <button mat-button (click)="emptyBasket()">Empty Basket</button>
 
-        <ul>
-
-            <li *ngFor="let product of basketFiltered; index as i">
-                {{ product.quantity }} x {{ product.name }} @ {{ product.price }} 
-                <span (click)="deleteItem(product)">Del</span>
-            </li>
-
-            <li><strong>Total: {{ total }}</strong></li>
-
-        </ul> 
+        <p>Basket Gross Total: {{(basket | async).grossTotal | currency:currency:true }}</p>
 
     </div>
 
