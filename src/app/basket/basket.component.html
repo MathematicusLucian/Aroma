@@ -35,8 +35,13 @@
     </div>
 
     <div fxLayout="row wrap" fxLayoutGap="16px">
-
-        <button mat-button (click)="emptyBasket()">Empty Basket</button>
+    
+        <button mat-button class="secondary button small expanded"
+            [attr.disabled]="itemCount === 0 ? true : null"
+            (click)="emptyBasket()">
+            Empty Basket
+            <i class="material-icons">delete_sweep</i>
+        </button>
 
     </div>
 

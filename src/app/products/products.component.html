@@ -20,10 +20,21 @@
         
     <div fxFlex="30%">
 
-        <button mat-button [routerLink]="['/basket']">View Basket</button>
-        <button mat-button (click)="emptyBasket()">Empty Basket</button>
+        <h3>Basket Gross Total: {{(basket | async).grossTotal | currency:currency:true }}</h3>
+        <p>({{itemCount}} items)</p>
 
-        <p>Basket Gross Total: {{(basket | async).grossTotal | currency:currency:true }}</p>
+        <button mat-button class="success button large expanded" 
+            [attr.disabled]="itemCount === 0 ? true : null" 
+            [routerLink]="['/basket']">
+            View Basket 
+            <i class="material-icons">shopping_basket</i>
+        </button>
+        <button mat-button class="secondary button small expanded"
+            [attr.disabled]="itemCount === 0 ? true : null"
+            (click)="emptyBasket()">
+            Empty Basket
+            <i class="material-icons">delete_sweep</i>
+        </button>
 
     </div>
 
