@@ -27,9 +27,10 @@
 
             <li *ngFor="let item of basketItems; index as i">
                 {{ item.quantity }} x {{ item.product.name }} @ {{ item.product.price | currency:currency:true }} = {{ item.subtotal | currency:currency:true }}
-                <span (click)="deleteItem(item.product)">
-                    <i class="material-icons">indeterminate_check_box</i> Delete
-                </span>
+                <button mat-raised-button color="warn" 
+                    (click)="deleteItem(item.product)">
+                    <i class="material-icons">indeterminate_check_box</i> remove item
+                </button>
             </li> 
 
         </ul>
@@ -38,11 +39,18 @@
 
     <div fxLayout="row wrap" fxLayoutGap="16px">
     
-        <button mat-button class="secondary button small expanded"
+        <button  mat-raised-button color="warn" 
             [attr.disabled]="itemCount === 0 ? true : null"
             (click)="emptyBasket()">
             Empty Basket
             <i class="material-icons">delete_sweep</i>
+        </button>
+
+        <button  mat-raised-button color="primary" 
+            [attr.disabled]="itemCount === 0 ? true : null" 
+            [routerLink]="['']">
+            Continue Shopping
+            <i class="material-icons">forward</i>
         </button>
 
     </div>

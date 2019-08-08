@@ -1,6 +1,6 @@
 <div class="page-wrapper container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
 
-    <div fxFlex="70%">
+    <div class="shop-col" fxFlex="70%">
 
         <p>Add a product to the basket</p>
 
@@ -18,18 +18,18 @@
 
     </div>
         
-    <div fxFlex="30%">
+    <div class="shop-col" fxFlex="30%">
 
         <h3>Basket Gross Total: {{(basket | async).grossTotal | currency:currency:true }}</h3>
         <p>({{itemCount}} items)</p>
 
-        <button mat-button class="success button large expanded" 
+        <button  mat-raised-button color="primary" 
             [attr.disabled]="itemCount === 0 ? true : null" 
             [routerLink]="['/basket']">
             View Basket 
             <i class="material-icons">shopping_basket</i>
         </button>
-        <button mat-button class="secondary button small expanded"
+        <button  mat-raised-button color="warn" 
             [attr.disabled]="itemCount === 0 ? true : null"
             (click)="emptyBasket()">
             Empty Basket
