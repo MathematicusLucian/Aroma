@@ -8,11 +8,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule  } from './app-material.module';
 import { FlexModule } from '@angular/flex-layout';
 import { BasketComponent } from './basket/basket.component';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BasketComponent
+    BasketComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
