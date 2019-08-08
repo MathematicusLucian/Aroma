@@ -8,9 +8,18 @@ import { DataService } from '../data.service';
 })
 export class BasketComponent implements OnInit {
 
+  basket: any;
+  total: any;
+
   constructor(private data: DataService) { }
 
   ngOnInit() {
+    this.basket = this.data.getBasketContents(); 
+    this.getTotal();
+  }
+
+  getTotal(){
+    this.total = this.data.getTotal();
   }
 
 }
