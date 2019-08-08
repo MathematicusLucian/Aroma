@@ -39,7 +39,9 @@ export class DataService {
   }
 
   deleteItem(id){
-    this.basket[id]["quantity"] -= 1;
+    if(this.basket[id]["quantity"] > 0){
+      this.basket[id]["quantity"] -= 1;
+    }
   }
 
   getBasketContents(){ 
