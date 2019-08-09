@@ -8,25 +8,28 @@
 
     <div fxLayout="row wrap" fxLayoutGap="16px">
 
-        <p>Basket Gross Total: {{(basket | async).grossTotal | currency:currency:true }}</p>
+        <mat-select name="currencies" [placeholder]="currency" 
+            (selectionChange)="setCurrency($event)"> 
+            <mat-option value="currency" disabled selected>{{ currency }}</mat-option>
+            <mat-option  *ngFor="let c of allCurrencies" [value]="c.name">{{ c.name }}</mat-option>
+        </mat-select>  
 
     </div>
 
     <div fxLayout="row wrap" fxLayoutGap="16px">
-        
-        {{exchangeRates}}
-        <mat-card *ngFor="let ex of exchangeRates; index as i"
-            (click)="setCurrency(i)"
-            fxFlex="calc(15% - 26px)">
-            <mat-card-header>
-                <mat-card-title>{{ ex.base }}</mat-card-title> 
-            </mat-card-header> 
-        </mat-card> 
 
-        <ul>
+        <h3>Basket Gross Total: {{(basket | async).grossTotal * exchangeRate | currency:currency:true }}</h3>
 
+    </div>
+
+    <div fxLayout="row wrap" fxLayoutGap="16px">
+
+        <ul> 
+            
             <li *ngFor="let item of basketItems; index as i">
-                {{ item.quantity }} x {{ item.product.name }} @ {{ item.product.price | currency:currency:true }} = {{ item.subtotal | currency:currency:true }}
+                {{ item.quantity }} x {{ item.product.name }} 
+                @ {{ item.price_exchanged | currency:currency:true }} per {{ item.product.grouping }}
+                <br> = {{ item.subtotal | currency:currency:true }}
                 <button mat-raised-button color="warn" 
                     (click)="deleteItem(item.product)">
                     <i class="material-icons">indeterminate_check_box</i> remove item

@@ -6,7 +6,7 @@ import { Basket } from "../models/basket.model";
 import { BasketItem } from "../models/basket-item.model"; 
 import { Product } from "../models/product.model";
 import { DataService } from '../services/data.service'; 
-import { BasketService } from '../services/basket.service';
+import { BasketService } from '../services/basket.service';  
 
 interface IBasketItem extends BasketItem {
   product: Product;
@@ -25,22 +25,31 @@ export class BasketComponent implements OnInit, OnDestroy {
   public itemCount: number;
   private products: Product[];
   private basketSubscription: Subscription;
-  private exchangeRates: any;
-  public currency: any;
-  public exchangeRate: any; 
-  private errorMessage: any;
+  private exchangeRate: any;  
+  public allCurrencies: any = [];
+  public currency: any;  
+  private errorMessage: any; 
 
-  constructor(private data: DataService, private basketService: BasketService) { 
+  constructor(private data: DataService, private basketService: BasketService) {  
+    data.getExchangeRates().subscribe(data => {
+      let returned = data["rates"];  
+      let z = JSON.stringify(returned).split(",").slice(1, -1); 
+      let i = 0;
+      z.forEach(element => { 
+          let name = element.split(":")[0].slice(1, -1);
+          this.allCurrencies.push({
+            "id": i,
+            "name": name,
+            "rate": element.split(":")[1]
+          }); 
+        i++;
+      }); 
+    });   
   }
-
+ 
   ngOnInit(): void { 
     this.currency = "GBP";
-
-    this.data.getExchangeRates().subscribe(rates => {
-      this.exchangeRates = rates["rates"];
-    }); 
-    console.log(this.exchangeRates);
-
+    this.exchangeRate = 1;   
     this.basket = this.basketService.get();
     this.basketSubscription = this.basket.subscribe((basket) => {
       this.itemCount = basket.items.map((x) => x.quantity).reduce((p, n) => p + n, 0);
@@ -51,14 +60,15 @@ export class BasketComponent implements OnInit, OnDestroy {
             const product = this.products.find((p) => p.id === item.productId);
             return {
               ...item,
-              product,
-              subtotal: product.price * item.quantity };
+              product,  
+              price_exchanged: product.price * this.exchangeRate,
+              subtotal: (product.price * item.quantity) * this.exchangeRate };
         });
       });
-    });
+    });  
   }  
 
-  ngOnDestroy() : void {
+  ngOnDestroy(): void {
     if (this.basketSubscription) {
       this.basketSubscription.unsubscribe();
     }
@@ -70,30 +80,21 @@ export class BasketComponent implements OnInit, OnDestroy {
 
   public emptyBasket(): void {
     this.basketService.empty();
+  } 
+
+  setCurrency(e){ 
+    this.currency = e.value;  
+
+    for(let c of this.allCurrencies){
+      if(c.name == e.value){
+        this.exchangeRate = c.rate;
+      }
+    } 
   }
 
   private handleError(invoker, error) {
     console.error(`[BasketComponent.${invoker}] : ERROR : ${error}`);
     this.errorMessage  = "ERROR : ${error}`";
-  }
-
-  /* getExchangeRate(currency): void {
-    this.data.getExchangeRate(currency)
-      .subscribe(
-        exchangeRate => {
-          console.log(exchangeRate); 
-          this.exchangeRate = exchangeRate;
-        }, 
-        error => this.handleError('getExchangeRate', error)
-      )
-
-    console.log(this.exchangeRate); 
-
-  } */
-
-  setCurrency(currency){
-   // this.getExchangeRate(currency);
-    console.log(this.exchangeRate);  
-  }
+  } 
 
 }

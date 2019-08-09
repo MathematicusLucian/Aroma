@@ -13,13 +13,13 @@ import { ProductsComponent } from './products/products.component';
 
 import { DataService } from "./services/data.service";
 import { BasketService } from "./services/basket.service"; 
-import { LocalStorageService, StorageService } from "./services/storage.service";
+import { LocalStorageService, StorageService } from "./services/storage.service"; 
 
 @NgModule({
   declarations: [
     AppComponent,
     BasketComponent,
-    ProductsComponent
+    ProductsComponent 
   ],
   imports: [
     BrowserModule,
@@ -27,7 +27,7 @@ import { LocalStorageService, StorageService } from "./services/storage.service"
     AppRoutingModule, 
     BrowserAnimationsModule,
     AppMaterialModule,
-    FlexModule, 
+    FlexModule
   ],
   providers: [
     DataService, 
