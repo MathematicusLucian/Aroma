@@ -2,11 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Observable, Subscription } from 'rxjs';
 
-import { Basket } from "../models/basket.model"; 
-import { BasketItem } from "../models/basket-item.model"; 
-import { Product } from "../models/product.model";
-import { DataService } from '../services/data.service'; 
-import { BasketService } from '../services/basket.service';  
+import { Basket } from "../../models/basket.model";
+import { BasketItem } from "../../models/basket-item.model"; 
+import { Product } from "../../models/product.model";
+import { DataService } from '../../services/data.service'; 
+import { BasketService } from '../../services/basket.service';  
 
 interface IBasketItem extends BasketItem {
   product: Product;

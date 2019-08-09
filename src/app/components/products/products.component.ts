@@ -2,10 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Observer, Observable, Subscription } from "rxjs";
 
-import { DataService } from '../services/data.service'; 
-import { BasketService } from '../services/basket.service'; 
-import { Product } from "../models/product.model";
-import { Basket } from "../models/basket.model"; 
+import { DataService } from '../../services/data.service'; 
+import { BasketService } from '../../services/basket.service'; 
+import { Product } from "../../models/product.model";
+import { Basket } from "../../models/basket.model"; 
 
 @Component({
   selector: 'app-products',

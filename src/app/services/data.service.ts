@@ -6,8 +6,7 @@ import { Observable } from 'rxjs';
 
 import { HttpClient } from '@angular/common/http';
 
-import { Product } from "../models/product.model";
-import { ExchangeRate } from "../models/exchange-rates.model"; 
+import { Product } from "../models/product.model"; 
 
 import { CachingService } from "./caching.service"; 
  
@@ -18,8 +17,7 @@ export class DataService extends CachingService {
 
   private apiUrl = 'https://api.exchangeratesapi.io/';
   
-  private products: Observable<Product[]>; 
-  private exchangeRates: Observable<ExchangeRate[]>; 
+  private products: Observable<Product[]>;  
 
   public constructor(private http: HttpClient) {
     super();
