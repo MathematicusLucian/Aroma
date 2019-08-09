@@ -1,12 +1,14 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { AppMaterialModule  } from './../app-material.module';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        AppMaterialModule
       ],
       declarations: [
         AppComponent
@@ -23,13 +25,13 @@ describe('AppComponent', () => {
   it(`should have as title 'shopping-basket-multi-currency'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('shopping-basket-multi-currency');
+    expect(app.title).toEqual('Corner Shop');
   });
 
-  it('should render title in a h1 tag', () => {
+  it('should render title in a span tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to shopping-basket-multi-currency!');
+    expect(compiled.querySelector('span').textContent).toContain('Corner Shop');
   });
 });

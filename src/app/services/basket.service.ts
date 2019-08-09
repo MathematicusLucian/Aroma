@@ -40,13 +40,13 @@ export class BasketService {
   }
 
   public addItem(product: Product, quantity: number): void {
-    const basket = this.retrieve();
+    const basket = this.retrieve(); 
     let item = basket.items.find((p) => p.productId === product.id);
     if (item === undefined) {
       item = new BasketItem();
       item.productId = product.id;
       basket.items.push(item);
-    }
+    } 
 
     item.quantity += quantity;
     basket.items = basket.items.filter((basketItem) => basketItem.quantity > 0);
@@ -58,6 +58,9 @@ export class BasketService {
 
   private calculateBasket(basket: Basket): void {
     console.log( basket.items);
+
+    console.log(this.products);
+
     basket.itemsTotal = basket.items
     .map((item) => item.quantity * this.products.find((p) => p.id === item.productId).price)
     .reduce((previous, current) => previous + current, 0); 
