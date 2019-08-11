@@ -8,19 +8,19 @@
 
     <div fxLayout="row wrap" fxLayoutGap="16px">
 
-        <h3>Basket Gross Total: {{(basket | async).grossTotal * exchangeRate | currency:currency:true }}</h3>
+        <h3 id="basket-total">Basket Gross Total: {{(basket | async).grossTotal * exchangeRate | currency:currency:true }}</h3>
 
     </div>
 
-    <div fxLayout="row wrap" fxLayoutGap="16px">
+    <div id="basket-items" fxLayout="row wrap" fxLayoutGap="16px">
 
         <ul> 
             
             <li *ngFor="let item of basketItems; index as i">
-                {{ item.quantity }} x {{ item.product.name }} 
-                @ {{ item.price_exchanged | currency:currency:true }} per {{ item.product.grouping }}
+                {{ item.quantity }} x <span class="item-name">{{ item.product.name }}</span>
+                @ <span class="item-price">{{ item.price_exchanged | currency:currency:true }}</span> per {{ item.product.grouping }}
                 <br> = {{ item.subtotal | currency:currency:true }}
-                <button mat-raised-button color="warn" 
+                <button class="delete-item" mat-raised-button color="warn" 
                     (click)="deleteItem(item.product)">
                     <i class="material-icons">indeterminate_check_box</i> remove item
                 </button>
@@ -32,7 +32,7 @@
 
     <div fxLayout="row wrap" fxLayoutGap="16px">
     
-        <button  mat-raised-button color="warn" 
+        <button id="empty-basket" mat-raised-button color="warn" 
             [attr.disabled]="itemCount === 0 ? true : null"
             (click)="emptyBasket()">
             Empty Basket

@@ -4,10 +4,9 @@
 
         <h3>Add a product to the basket</h3>
 
-        <div fxLayout="row wrap" fxLayoutGap="16px">
+        <div id="products" fxLayout="row wrap" fxLayoutGap="16px">
 
             <mat-card *ngFor="let product of products; index as i"
-                (click)="addItem(product)"
                 fxFlex="calc(50% - 56px)">
                 <mat-card-header>
                     <mat-card-title>{{ product.name }}</mat-card-title> 
@@ -16,6 +15,11 @@
                 <mat-card-content>
                     {{ product.price | currency:currency:true }} per {{ product.grouping }}
                 </mat-card-content>
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" 
+                    class="add-item"
+                    (click)="addItem(product)">Add to Basket</button>
+                </mat-card-actions>
             </mat-card>
 
         </div>

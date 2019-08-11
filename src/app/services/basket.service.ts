@@ -57,9 +57,9 @@ export class BasketService {
   }
 
   private calculateBasket(basket: Basket): void {
-    console.log( basket.items);
+    //console.log(basket.items);
 
-    console.log(this.products);
+    //console.log(this.products);
 
     basket.itemsTotal = basket.items
     .map((item) => item.quantity * this.products.find((p) => p.id === item.productId).price)
