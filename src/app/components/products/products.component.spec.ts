@@ -139,11 +139,12 @@ describe('ProductsComponent', () => {
 
   it("should display all products", async(() => { 
     fixture.detectChanges(); 
-    
+
     const compiled = fixture.debugElement.nativeElement;
 
     const productElements = compiled.querySelectorAll("#products");
-    expect(productElements.length).toEqual(2);
+    console.log(productElements);
+    expect(productElements.length).toEqual(4);
 
     expect(productElements[0].querySelector(".item-name").textContent).toEqual(PRODUCT_1.name);
     expect(productElements[0].querySelector(".item-price").textContent).toContain(PRODUCT_1.price); 

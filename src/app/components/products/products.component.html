@@ -6,7 +6,8 @@
 
         <div id="products" fxLayout="row wrap" fxLayoutGap="16px">
 
-            <mat-card *ngFor="let product of products; index as i"
+            <mat-card class="product-card"
+                *ngFor="let product of products; index as i"
                 fxFlex="calc(50% - 56px)">
                 <mat-card-header>
                     <mat-card-title>{{ product.name }}</mat-card-title> 
