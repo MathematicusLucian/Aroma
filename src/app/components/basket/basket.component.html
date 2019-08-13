@@ -30,6 +30,17 @@
 
     </div>
 
+    <div id="currency_row" fxLayout="row wrap" fxLayoutGap="16px">
+
+            <strong>Currency: </strong>
+            <mat-select name="currencies" [placeholder]="currency" 
+            (selectionChange)="setCurrency($event)"> 
+            <mat-option value="currency" disabled selected>{{ currency }}</mat-option>
+            <mat-option  *ngFor="let c of allCurrencies" [value]="c.name">{{ c.name }}</mat-option>
+        </mat-select>  
+
+    </div>
+
     <div fxLayout="row wrap" fxLayoutGap="16px">
     
         <button id="empty-basket" mat-raised-button color="warn" 
@@ -44,17 +55,6 @@
             Continue Shopping
             <i class="material-icons">forward</i>
         </button>
-
-    </div>
-
-    <div id="currency_row" fxLayout="row wrap" fxLayoutGap="16px">
-
-            Currency: 
-            <mat-select name="currencies" [placeholder]="currency" 
-            (selectionChange)="setCurrency($event)"> 
-            <mat-option value="currency" disabled selected>{{ currency }}</mat-option>
-            <mat-option  *ngFor="let c of allCurrencies" [value]="c.name">{{ c.name }}</mat-option>
-        </mat-select>  
 
     </div>
 
