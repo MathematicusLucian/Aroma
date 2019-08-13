@@ -28,13 +28,13 @@ PRODUCT_1.price = 0.95;
 
 const PRODUCT_2 = new Product();
 PRODUCT_2.name = "Eggs";
-PRODUCT_2.id = "3";
+PRODUCT_2.id = "2";
 PRODUCT_2.price = 2.10;
 
 const PRODUCT_3 = new Product();
-PRODUCT_2.name = "Milk";
-PRODUCT_2.id = "4";
-PRODUCT_2.price = 1.30;
+PRODUCT_3.name = "Milk";
+PRODUCT_3.id = "3";
+PRODUCT_3.price = 1.30;
 
 // tslint:disable-next-line:max-classes-per-file
 class MockProductDataService extends DataService {
@@ -101,15 +101,13 @@ describe('ProductsComponent', () => {
         { provide: StorageService, useClass: LocalStorageService }
       ]  
     })
-    .compileComponents();
-  }));
+    .compileComponents(); 
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(ProductsComponent);
     component = fixture.componentInstance; 
 
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -121,28 +119,44 @@ describe('ProductsComponent', () => {
     expect(compiled.querySelector('h3').textContent).toContain('Add a product to the basket');
   });
 
+  it('should render "Add to Basket" in a button tag', () => {
+    fixture.detectChanges();
+
+    const compiled = fixture.debugElement.nativeElement;
+    const productElements = compiled.querySelector("#products"); 
+
+    expect(productElements.querySelector('button.mat-primary').textContent).toContain('Add to Basket');
+  });
+
   it('should render "View Basket" in a button tag', () => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('button.mat-primary').textContent).toContain('View Basket');
+    const secondCol = compiled.querySelector(".shop-col:nth-child(2)"); 
+
+    expect(secondCol.querySelector('button.mat-primary').textContent).toContain('View Basket');
   });
 
   it('should render "Empty Basket" in a button tag', () => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
+
     expect(compiled.querySelector('button.mat-warn').textContent).toContain('Empty Basket');
   });
-  /*
-  it("should display all products", async(() => { 
+  
+  it("should display all products - count: expect 4", async(() => { 
     fixture.detectChanges(); 
 
     const compiled = fixture.debugElement.nativeElement;
-    const productElements = compiled.querySelectorAll(".product-card");
-
-    //This is running before DOM loads?
-    console.log(productElements);
+    const productElements = compiled.querySelectorAll(".product-card"); 
     
-    expect(productElements.length).toEqual(4);
+    expect(productElements.length).toEqual(4); 
+  }));
+  
+  it("should display all products - check content: name, price", async(() => { 
+    fixture.detectChanges(); 
+
+    const compiled = fixture.debugElement.nativeElement;
+    const productElements = compiled.querySelectorAll(".product-card");  
 
     expect(productElements[0].querySelector(".item-name").textContent).toEqual(PRODUCT_1.name);
     expect(productElements[0].querySelector(".item-price").textContent).toContain(PRODUCT_1.price); 
@@ -150,26 +164,30 @@ describe('ProductsComponent', () => {
     expect(productElements[1].querySelector(".item-name").textContent).toEqual(PRODUCT_2.name);
     expect(productElements[1].querySelector(".item-price").textContent).toContain(PRODUCT_2.price); 
 
-    expect(productElements[0].querySelector(".item-name").textContent).toEqual(PRODUCT_3.name);
-    expect(productElements[0].querySelector(".item-price").textContent).toContain(PRODUCT_3.price); 
+    expect(productElements[2].querySelector(".item-name").textContent).toEqual(PRODUCT_3.name);
+    expect(productElements[2].querySelector(".item-price").textContent).toContain(PRODUCT_3.price); 
 
   }));
-  */
+  
   /*
   it("should add product to basket upon click on add item button",
-     async(inject([BasketService], (service: MockBasketService) => {
-    const fixture = TestBed.createComponent(ProductsComponent);
-    fixture.detectChanges();
+    async(inject([BasketService], (service: MockBasketService) => {
+      const fixture = TestBed.createComponent(ProductsComponent);
 
-    const addItemSpy = sinon.spy(service, "addItem");
+      fixture.detectChanges();
 
-    const component = fixture.debugElement.componentInstance;
-    const compiled = fixture.debugElement.nativeElement;
-    const productElements = compiled.querySelectorAll(".product-card");
+      const addItemSpy = sinon.spy(service, "addItem"); 
 
-    productElements[0].querySelector(".add-item").click();
-    sinon.assert.calledOnce(addItemSpy);
-    sinon.assert.calledWithExactly(addItemSpy, PRODUCT_1, 1);
+      const compiled = fixture.debugElement.nativeElement;
+      const productElements = compiled.querySelector("#products");
+
+      console.log(productElements);
+      console.log(compiled.querySelectorAll(".product-card"));
+
+      productElements.querySelectorAll("button.mat-primary")[0].click();
+
+      sinon.assert.calledOnce(addItemSpy);
+      sinon.assert.calledWithExactly(addItemSpy, PRODUCT_1, 1);
   })));
   */
 });

@@ -1,4 +1,4 @@
-import { inject, TestBed } from "@angular/core/testing";
+import { async, inject, TestBed } from "@angular/core/testing";
 
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http'; 
 
@@ -21,17 +21,17 @@ PRODUCT_1.price = 0.95;
 
 const PRODUCT_2 = new Product();
 PRODUCT_2.name = "Eggs";
-PRODUCT_2.id = "3";
+PRODUCT_2.id = "2";
 PRODUCT_2.price = 2.10;
 
 const PRODUCT_3 = new Product();
-PRODUCT_2.name = "Milk";
-PRODUCT_2.id = "4";
-PRODUCT_2.price = 1.30;
+PRODUCT_3.name = "Milk";
+PRODUCT_3.id = "3";
+PRODUCT_3.price = 1.30;
 
 class MockProductDataService extends DataService {
   public all(): Observable<Product[]> {
-    return Observable.from([[PRODUCT_1, PRODUCT_2]]);
+    return Observable.from([[PRODUCT_1, PRODUCT_2, PRODUCT_3]]);
   }
 }
 
@@ -39,7 +39,7 @@ describe("BasketService", () => {
 
   let sandbox: sinon.SinonSandbox;
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     sandbox = sinon.createSandbox();
 
     TestBed.configureTestingModule({
@@ -52,7 +52,7 @@ describe("BasketService", () => {
         BasketService
      ]
     });
-  });
+  }));
 
   afterEach(() => {
     sandbox.restore();
@@ -78,7 +78,7 @@ describe("BasketService", () => {
         const basketService = service.get(); 
 
         basketService.subscribe((basket) => {  
-          expect(basket.items).toEqual([]);  
+          expect(basket.items).toEqual([]); //1
       });  
     })); 
 
@@ -88,7 +88,7 @@ describe("BasketService", () => {
         const basketService = service.get(); 
 
         basketService.subscribe((basket) => {  
-          expect(basket.grossTotal).toEqual(0);  
+          expect(basket.grossTotal).toEqual(0); //0.95 
       });  
     })); 
 
@@ -98,7 +98,7 @@ describe("BasketService", () => {
         const basketService = service.get(); 
 
         basketService.subscribe((basket) => {  
-          expect(basket.itemsTotal).toEqual(0);   
+          expect(basket.itemsTotal).toEqual(0); //0.95
         });  
     })); 
 
@@ -109,9 +109,9 @@ describe("BasketService", () => {
 
         basketService.subscribe((basket) => {
           expect(basket).toEqual(jasmine.any(Basket));
-          expect(basket.items.length).toEqual(0);
-          expect(basket.itemsTotal).toEqual(0);
-          expect(basket.grossTotal).toEqual(0);
+          expect(basket.items.length).toEqual(0); //1
+          expect(basket.itemsTotal).toEqual(0); //0.95
+          expect(basket.grossTotal).toEqual(0); //0.95
         });
     }));
 
@@ -124,7 +124,7 @@ describe("BasketService", () => {
         TestBasket.grossTotal = 3;
 
         sandbox.stub(localStorage, "getItem")
-              .returns(JSON.stringify(TestBasket));
+          .returns(JSON.stringify(TestBasket));
 
         const basketService = service.get();
 
@@ -148,11 +148,11 @@ describe("BasketService", () => {
 
         sinon.assert.calledOnce(stub);
 
-        //expect();
+        //expect(sinon.assert ? );
     })); 
 
   });
-
+/*
   describe("addItem()", () => {
     beforeEach(() => {
       let persistedbasket: string;
@@ -163,7 +163,7 @@ describe("BasketService", () => {
       sandbox.stub(localStorage, "getItem")
         .callsFake((key) => persistedbasket);
     });  
-/* 
+
     it("should add the item to the basket and persist",
       inject([BasketService], (service: BasketService) => {   
         service.addItem(PRODUCT_1, 1);
@@ -208,11 +208,11 @@ describe("BasketService", () => {
           });
     }));
 */
-  }); 
+ // }); 
 
   describe("totals calculation", () => {
 
-    beforeEach(() => {
+    beforeEach(async(() => {
       let persistedbasket: string;
       
       const setItemStub = sandbox.stub(localStorage, "setItem")
@@ -220,8 +220,8 @@ describe("BasketService", () => {
 
       sandbox.stub(localStorage, "getItem")
         .callsFake((key) => persistedbasket);
-    });
-/*
+    }));
+
     it("should calculate the shopping basket totals correctly",
       inject([BasketService], (service: BasketService) => {
         service.addItem(PRODUCT_1, 2);
@@ -234,7 +234,7 @@ describe("BasketService", () => {
             expect(basket.itemsTotal).toEqual((PRODUCT_1.price * 2) + PRODUCT_2.price + PRODUCT_3.price);
           });
     }));
-*/
+
   });
 
 });

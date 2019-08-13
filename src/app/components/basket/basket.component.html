@@ -8,7 +8,7 @@
 
     <div fxLayout="row wrap" fxLayoutGap="16px">
 
-        <h3 id="basket-total">Basket Gross Total: {{(basket | async).grossTotal * exchangeRate | currency:currency:true }}</h3>
+        <h3 id="basket-total">Basket Gross Total: {{(basket | async).grossTotal * exchangeRate | currency:currency:symbol }}</h3>
 
     </div>
 
@@ -18,8 +18,8 @@
             
             <li *ngFor="let item of basketItems; index as i">
                 {{ item.quantity }} x <span class="item-name">{{ item.product.name }}</span>
-                @ <span class="item-price">{{ item.price_exchanged | currency:currency:true }}</span> per {{ item.product.grouping }}
-                <br> = {{ item.subtotal | currency:currency:true }}
+                @ <span class="item-price">{{ item.price_exchanged | currency:currency:symbol }}</span> per {{ item.product.grouping }}
+                <br> = {{ item.subtotal | currency:currency:symbol }}
                 <button class="delete-item" mat-raised-button color="warn" 
                     (click)="deleteItem(item.product)">
                     <i class="material-icons">indeterminate_check_box</i> remove item

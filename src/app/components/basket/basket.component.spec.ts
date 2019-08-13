@@ -28,13 +28,13 @@ PRODUCT_1.price = 0.95;
 
 const PRODUCT_2 = new Product();
 PRODUCT_2.name = "Eggs";
-PRODUCT_2.id = "3";
+PRODUCT_2.id = "2";
 PRODUCT_2.price = 2.10;
 
 const PRODUCT_3 = new Product();
-PRODUCT_2.name = "Milk";
-PRODUCT_2.id = "4";
-PRODUCT_2.price = 1.30;
+PRODUCT_3.name = "Milk";
+PRODUCT_3.id = "3";
+PRODUCT_3.price = 1.30;
 
 // tslint:disable-next-line:max-classes-per-file
 class MockProductDataService extends DataService {
@@ -98,15 +98,13 @@ describe('BasketComponent', () => {
         { provide: BasketService, useClass: MockBasketService }
       ]
     })
-    .compileComponents();  
-  }));
+    .compileComponents();   
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(BasketComponent);
     component = fixture.componentInstance; 
 
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', async(() => {  
     expect(component).toBeTruthy();

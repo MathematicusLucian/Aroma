@@ -25,6 +25,7 @@ export class BasketService {
                      private data: DataService) {
     this.storage = this.storageService.get();
     this.data.getProducts().subscribe((products) => this.products = products); 
+    console.log(this.products);
 
     this.subscriptionObservable = new Observable<Basket>((observer: Observer<Basket>) => {
       this.subscribers.push(observer);
