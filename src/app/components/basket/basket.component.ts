@@ -51,13 +51,18 @@ export class BasketComponent implements OnInit, OnDestroy {
     this.currency = "GBP";
     this.exchangeRate = 1;   
     this.basket = this.basketService.get();
+    console.log(this.basket);
     this.basketSubscription = this.basket.subscribe((basket) => {
       this.itemCount = basket.items.map((x) => x.quantity).reduce((p, n) => p + n, 0);
       this.data.getProducts().subscribe((products) => {
+        //console.log(products);
+        //console.log(basket.items);
         this.products = products;
         this.basketItems = basket.items
           .map((item) => {
             const product = this.products.find((p) => p.id === item.productId);
+            //console.log(product);
+            
             return {
               ...item,
               product,  

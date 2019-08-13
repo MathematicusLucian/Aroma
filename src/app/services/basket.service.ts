@@ -56,11 +56,7 @@ export class BasketService {
     this.dispatch(basket);
   }
 
-  private calculateBasket(basket: Basket): void {
-    //console.log(basket.items);
-
-    //console.log(this.products);
-
+  private calculateBasket(basket: Basket): void { 
     basket.itemsTotal = basket.items
     .map((item) => item.quantity * this.products.find((p) => p.id === item.productId).price)
     .reduce((previous, current) => previous + current, 0); 
@@ -81,11 +77,11 @@ export class BasketService {
     this.storage.setItem(basket_KEY, JSON.stringify(basket));
   } 
 
-  private dispatch(cart: Basket): void {
+  private dispatch(basket: Basket): void { 
     this.subscribers
       .forEach((sub) => {
         try {
-          sub.next(cart);
+          sub.next(basket);
         } catch (e) { 
         }
       });

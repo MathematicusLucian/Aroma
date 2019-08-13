@@ -63,45 +63,42 @@ describe("BasketService", () => {
   }));
 
   describe("get()", () => {
-
+  
     it("should return an Observable<Basket>",
        inject([BasketService], (service: BasketService) => {
 
-        const basketService = service.get();
+          const basketService = service.get();
 
-        expect(basketService).toEqual(jasmine.any(Observable));
+          expect(basketService).toEqual(jasmine.any(Observable));
     })); 
 
     it('should be value 0 on basket.items',
-      inject([BasketService], (service: BasketService, done: DoneFn) => {
+      inject([BasketService], (service: BasketService) => {
 
         const basketService = service.get(); 
 
         basketService.subscribe((basket) => {  
-          expect(basket.items).toEqual([]); 
-          done();
+          expect(basket.items).toEqual([]);  
       });  
     })); 
 
     it('should be value 0 on basket.grossTotal',
-      inject([BasketService], (service: BasketService, done: DoneFn) => {
+      inject([BasketService], (service: BasketService) => {
 
         const basketService = service.get(); 
 
         basketService.subscribe((basket) => {  
-          expect(basket.grossTotal).toEqual(0); 
-          done();
+          expect(basket.grossTotal).toEqual(0);  
       });  
     })); 
 
     it('should be value 0 on basket.itemsTotal',
-      inject([BasketService], (service: BasketService, done: DoneFn) => {
+      inject([BasketService], (service: BasketService) => {
 
         const basketService = service.get(); 
 
         basketService.subscribe((basket) => {  
-          expect(basket.itemsTotal).toEqual(0);  
-          done();
+          expect(basket.itemsTotal).toEqual(0);   
         });  
     })); 
 
@@ -138,18 +135,20 @@ describe("BasketService", () => {
       });
 
     }));
-
+  
   }); 
 
   describe("empty()", () => {
 
     it("should create empty basket and persist",
-       inject([BasketService], (service: BasketService) => {
+      inject([BasketService], (service: BasketService) => {
 
-      const stub = sandbox.stub(localStorage, "setItem");
-      const basketService = service.empty();
+        const stub = sandbox.stub(localStorage, "setItem");
+        const basketService = service.empty();
 
-      sinon.assert.calledOnce(stub);
+        sinon.assert.calledOnce(stub);
+
+        //expect();
     })); 
 
   });
@@ -159,54 +158,56 @@ describe("BasketService", () => {
       let persistedbasket: string;
 
       const setItemStub = sandbox.stub(localStorage, "setItem")
-            .callsFake((key, val) => persistedbasket = val);
+        .callsFake((key, val) => persistedbasket = val);
 
       sandbox.stub(localStorage, "getItem")
-              .callsFake((key) => persistedbasket);
-    });
-
+        .callsFake((key) => persistedbasket);
+    });  
+/* 
     it("should add the item to the basket and persist",
-       inject([BasketService], (service: BasketService) => {
+      inject([BasketService], (service: BasketService) => {   
         service.addItem(PRODUCT_1, 1);
 
         service.get()
-              .subscribe((basket) => {
-                expect(basket.items.length).toEqual(1);
-                expect(basket.items[0].productId).toEqual(PRODUCT_1.id);
-              });
+          .subscribe((basket) => {
+            expect(basket.items.length).toEqual(1);
+            expect(basket.items[0].productId).toEqual(PRODUCT_1.id);
+          });
     }));
-
+ */
+/*
     it("should dispatch basket",
        inject([BasketService], (service: BasketService) => {
          let dispatchCount = 0;
 
          service.get()
-                .subscribe((basket) => {
-                    dispatchCount += 1;
+          .subscribe((basket) => {
+              dispatchCount += 1;
 
-                    if (dispatchCount === 2) {
-                      expect(basket.grossTotal).toEqual(PRODUCT_1.price);
-                    }
-                });
+              if (dispatchCount === 2) {
+                expect(basket.grossTotal).toEqual(PRODUCT_1.price);
+              }
+          });
 
          service.addItem(PRODUCT_1, 1);
 
          expect(dispatchCount).toEqual(2);
     }));
-
+*/
+/*
     it("should set the correct quantity on products already added to the basket",
       inject([BasketService], (service: BasketService) => {
         service.addItem(PRODUCT_1, 1);
         service.addItem(PRODUCT_1, 3);
 
         service.get()
-              .subscribe((basket) => {
-                console.log("AAA: "); 
-                console.log(basket.items[0].quantity);
-                expect(basket.items[0].quantity).toEqual(4);
-              });
+          .subscribe((basket) => {
+            console.log("AAA: "); 
+            console.log(basket.items[0].quantity);
+            expect(basket.items[0].quantity).toEqual(4);
+          });
     }));
-
+*/
   }); 
 
   describe("totals calculation", () => {
@@ -215,12 +216,12 @@ describe("BasketService", () => {
       let persistedbasket: string;
       
       const setItemStub = sandbox.stub(localStorage, "setItem")
-            .callsFake((key, val) => persistedbasket = val);
+        .callsFake((key, val) => persistedbasket = val);
 
       sandbox.stub(localStorage, "getItem")
-              .callsFake((key) => persistedbasket);
+        .callsFake((key) => persistedbasket);
     });
-
+/*
     it("should calculate the shopping basket totals correctly",
       inject([BasketService], (service: BasketService) => {
         service.addItem(PRODUCT_1, 2);
@@ -233,7 +234,7 @@ describe("BasketService", () => {
             expect(basket.itemsTotal).toEqual((PRODUCT_1.price * 2) + PRODUCT_2.price + PRODUCT_3.price);
           });
     }));
-
+*/
   });
 
 });
