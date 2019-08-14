@@ -1,4 +1,4 @@
-# Angular RxJS Shopping Basket (multi-currency)
+# Aroma
 
 Angular 8 shopping basket app. 
 - Generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
