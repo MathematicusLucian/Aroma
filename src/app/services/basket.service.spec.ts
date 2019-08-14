@@ -29,6 +29,34 @@ PRODUCT_3.name = "Milk";
 PRODUCT_3.id = "3";
 PRODUCT_3.price = 1.30;
 
+/**    desc: "A smooth, medium-bodied blend. Made with 100% prized Arabica Beans."
+    grouping: "bag"
+    id: 2
+    img: "00043000050019.1200w.jpg"
+    name: "Signature Blend 12CT"
+    price: 9.29
+
+    desc: "With one touch of a button, find yourself transported to a toasty lodge in the snow-covered Alps. Gently roasted Swiss Hazelnut from Gevalia offers a beautiful blend of Arabica beans and soft hazelnut flavor, delivering the satisfying smoothness you desire."
+grouping: "bag"
+id: 2
+img: "00043000019429.1200w.jpg"
+name: "GEVALIA Swiss Hazelnut"
+price: 14.99
+
+desc: "The signature Peet’s roast gives our Decaf House more body and complexity than almost any other decaf blend. Packaging may vary."
+grouping: "bag"
+id: 3
+img: "HouseBlendDecaf_16ct_KCup_w_Pods_Hi-Res_Final_720x540.jpg"
+name: "Decaf House Blend K-Cup® Packs"
+price: 13.99
+
+desc: "Our most exquisite coffee blend, created by Roastmaster Emeritus Jim Reynolds from rare lots. Exceptionally complex and full-bodied, revealing hints of chocolate and spice."
+grouping: "bag"
+id: 4
+img: "pct_hd_reserve_8oz_jr_1440x1080.jpg"
+name: "JR Reserve Blend"
+price: 24.95 */
+
 class MockProductDataService extends DataService {
   public getProducts(): Observable<Product[]> {
     return Observable.from([[PRODUCT_1, PRODUCT_2, PRODUCT_3]]);
