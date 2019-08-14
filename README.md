@@ -4,8 +4,7 @@ Angular 8 shopping basket app.
 - Generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
 - RxJS Observables
 - Immutable basket. Local storage of basket contents
-- API call for exchange rates, with error handler  
-- Calls exchange rates API for multi-currency option
+- Calls exchange rates API for multi-currency option, with error handler  
 - Google Material and Font Awesome styling. SCSS
 - Unit tests: Karma (runner), Jasmine (framework), SinonJS (mocking), e2e
 
@@ -23,14 +22,14 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Running unit tests
 
+37 specs, 0 failures
+
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 3 specs have no expectations; I need to study 'sinon' more. Also there is regards polyfills.js:3296 an "Uncaught TypeError: Right-hand side of 'instanceof' is not callable"
 
 ## Unit test details
 ![tests](./readme_imgs/tests.png)
-
-37 specs, 0 failures
 
 BasketService  
 - should be injectable  
