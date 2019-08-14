@@ -1,6 +1,10 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary"> 
+  <img 
+    id="toolbarImg"
+    [routerLink]="['']"  
+    src="./../../assets/img/red_dragon.png" alt="red_dragon"> 
   <span [routerLink]="['']">
-    <i class="material-icons">store_mall_directory</i> Corner Shop
+    {{ title }}
   </span>
 </mat-toolbar>
   
