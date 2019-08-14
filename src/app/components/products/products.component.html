@@ -15,6 +15,7 @@
                 <div mat-card-image [style.background-image]="'url(assets/img/'+ product.img +')'"></div>  
                 <mat-card-content>
                     <span class="item-price">{{ product.price | currency:currency:true }}</span> per {{ product.grouping }}
+                    <p>{{ product.desc }}</p>
                 </mat-card-content>
                 <mat-card-actions>
                     <button mat-raised-button color="primary" 
