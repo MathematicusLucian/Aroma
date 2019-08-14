@@ -25,13 +25,13 @@ describe('AppComponent', () => {
   it(`should have as title 'shopping-basket-multi-currency'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('Y Siop Fach');
+    expect(app.title).toEqual('Aroma');
   });
 
   it('should render title in a span tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('span').textContent).toContain('Y Siop Fach');
+    expect(compiled.querySelector('span').textContent).toContain('Aroma');
   });
 });
