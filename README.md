@@ -1,6 +1,6 @@
 # Aroma
 
-Angular 8 shopping basket app. 
+Angular 8 shopping app. 
 - Generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
 - RxJS Observables
 - Immutable basket. Local storage of basket contents
