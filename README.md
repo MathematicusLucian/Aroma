@@ -20,7 +20,6 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 ![basket_route](./readme_imgs/basket-route.png)
 
 # Tests
-![tests](./readme_imgs/tests.png)
 
 ## Running unit tests
 
@@ -29,6 +28,7 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 3 specs have no expectations; I need to study 'sinon' more. Also there is regards polyfills.js:3296 an "Uncaught TypeError: Right-hand side of 'instanceof' is not callable"
 
 ## Unit test details
+![tests](./readme_imgs/tests.png)
 
 37 specs, 0 failures
 
