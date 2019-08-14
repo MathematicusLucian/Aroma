@@ -23,16 +23,18 @@ export class BasketService {
 
   public constructor(private storageService: StorageService,
                      private data: DataService) {
+
     this.storage = this.storageService.get();
-    this.data.getProducts().subscribe((products) => this.products = products); 
-    console.log(this.products);
+    this.data.getProducts().subscribe((products) => this.products = products);  
 
     this.subscriptionObservable = new Observable<Basket>((observer: Observer<Basket>) => {
       this.subscribers.push(observer);
       observer.next(this.retrieve());
+
       return () => {
         this.subscribers = this.subscribers.filter((obs) => obs !== observer);
       };
+      
     });
   }
 
@@ -43,6 +45,7 @@ export class BasketService {
   public addItem(product: Product, quantity: number): void {
     const basket = this.retrieve(); 
     let item = basket.items.find((p) => p.productId === product.id);
+
     if (item === undefined) {
       item = new BasketItem();
       item.productId = product.id;
@@ -67,6 +70,7 @@ export class BasketService {
   private retrieve(): Basket {
     const basket = new Basket();
     const storedbasket = this.storage.getItem(basket_KEY);
+
     if (storedbasket) {
       basket.updateFrom(JSON.parse(storedbasket));
     }
@@ -90,6 +94,7 @@ export class BasketService {
 
   public empty(): void {
     const newbasket = new Basket();
+    
     this.save(newbasket);
     this.dispatch(newbasket);
   } 

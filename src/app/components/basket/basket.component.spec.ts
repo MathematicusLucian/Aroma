@@ -38,7 +38,7 @@ PRODUCT_3.price = 1.30;
 
 // tslint:disable-next-line:max-classes-per-file
 class MockProductDataService extends DataService {
-  public all(): Observable<Product[]> {
+  public getProducts(): Observable<Product[]> {
     return Observable.from([[PRODUCT_1, PRODUCT_2, PRODUCT_3]]);
   }
 }
@@ -57,6 +57,8 @@ class MockBasketService {
       return () => this.unsubscribeCalled = true;
     });
   }
+
+  public addItem(product: Product, quantity: number): void {}
 
   public get(): Observable<Basket> {
     return this.subscriptionObservable;
@@ -92,8 +94,7 @@ describe('BasketComponent', () => {
         FlexModule
       ],
       providers: [
-        { provide: DataService, useClass: MockProductDataService },
-        //{ provide: DataService, useValue: sinon.createStubInstance(DataService) },
+        { provide: DataService, useClass: MockProductDataService }, 
         { provide: StorageService, useClass: LocalStorageService },
         { provide: BasketService, useClass: MockBasketService }
       ]
@@ -146,11 +147,8 @@ describe('BasketComponent', () => {
       expect(compiled.querySelector("#basket-total").textContent).toContain("0.95");
   })));
 
-  /*
-
   it("should remove product from basket upon click on remove item button",
     async(inject([BasketService], (service: MockBasketService) => {
-
       const newBasket = new Basket();
       const newBasketItem = new BasketItem();
 
@@ -160,23 +158,21 @@ describe('BasketComponent', () => {
       newBasket.items = [newBasketItem];
 
       service.dispatchBasket(newBasket);
-
-      const fixture = TestBed.createComponent(ProductsComponent);
+      
+      const fixture = TestBed.createComponent(BasketComponent);
+      
       fixture.detectChanges();
-
+      
       const addItemSpy = sinon.spy(service, "addItem");
-
       const component = fixture.debugElement.componentInstance;
       const compiled = fixture.debugElement.nativeElement;
-      const productElements = compiled.querySelectorAll("#basket-items");
+      const productElements = compiled.querySelectorAll("#basket-items"); 
 
-      productElements[0].querySelector(".delete-item").click();
+      productElements[0].querySelector("button.mat-warn").click();
+      
       sinon.assert.calledOnce(addItemSpy);
       sinon.assert.calledWithExactly(addItemSpy, PRODUCT_1, -1);
   }))); 
-
-  */
-  /*
 
   it("should empty basket upon click on the empty basket button",
     async(inject([BasketService], (service: MockBasketService) => {
@@ -186,9 +182,7 @@ describe('BasketComponent', () => {
       newBasketItem.productId = "1";
       newBasketItem.quantity = 1; 
       basket.grossTotal = 0.95;
-      basket.items = [newBasketItem];
-
-      //console.log(newBasket);
+      basket.items = [newBasketItem]; 
 
       service.dispatchBasket(basket);
 
@@ -199,7 +193,5 @@ describe('BasketComponent', () => {
 
       expect(service.emptyCalled).toBeTruthy();
     })));
-
-    */
 
 });

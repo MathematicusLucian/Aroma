@@ -30,7 +30,7 @@ PRODUCT_3.id = "3";
 PRODUCT_3.price = 1.30;
 
 class MockProductDataService extends DataService {
-  public all(): Observable<Product[]> {
+  public getProducts(): Observable<Product[]> {
     return Observable.from([[PRODUCT_1, PRODUCT_2, PRODUCT_3]]);
   }
 }
@@ -67,6 +67,8 @@ describe("BasketService", () => {
     it("should return an Observable<Basket>",
        inject([BasketService], (service: BasketService) => {
 
+          service.empty();
+
           const basketService = service.get();
 
           expect(basketService).toEqual(jasmine.any(Observable));
@@ -74,6 +76,8 @@ describe("BasketService", () => {
 
     it('should be value 0 on basket.items',
       inject([BasketService], (service: BasketService) => {
+
+        service.empty();
 
         const basketService = service.get(); 
 
@@ -85,6 +89,8 @@ describe("BasketService", () => {
     it('should be value 0 on basket.grossTotal',
       inject([BasketService], (service: BasketService) => {
 
+        service.empty();
+
         const basketService = service.get(); 
 
         basketService.subscribe((basket) => {  
@@ -94,6 +100,8 @@ describe("BasketService", () => {
 
     it('should be value 0 on basket.itemsTotal',
       inject([BasketService], (service: BasketService) => {
+
+        service.empty();
 
         const basketService = service.get(); 
 
@@ -105,10 +113,13 @@ describe("BasketService", () => {
     it("should return a Basket model instance when the Observable is subscribed to",
       inject([BasketService], (service: BasketService) => {
 
+        service.empty();
+
         const basketService = service.get();
 
         basketService.subscribe((basket) => {
           expect(basket).toEqual(jasmine.any(Basket));
+
           expect(basket.items.length).toEqual(0); //1
           expect(basket.itemsTotal).toEqual(0); //0.95
           expect(basket.grossTotal).toEqual(0); //0.95
@@ -138,21 +149,23 @@ describe("BasketService", () => {
   
   }); 
 
-  describe("empty()", () => {
+  describe("empty()", () => { 
 
     it("should create empty basket and persist",
       inject([BasketService], (service: BasketService) => {
 
         const stub = sandbox.stub(localStorage, "setItem");
-        const basketService = service.empty();
+        service.empty(); 
 
-        sinon.assert.calledOnce(stub);
-
-        //expect(sinon.assert ? );
+        (done: DoneFn) => {
+          sinon.assert.calledOnce(stub);
+  
+          done();
+        }
     })); 
 
   });
-/*
+
   describe("addItem()", () => {
     beforeEach(() => {
       let persistedbasket: string;
@@ -174,8 +187,7 @@ describe("BasketService", () => {
             expect(basket.items[0].productId).toEqual(PRODUCT_1.id);
           });
     }));
- */
-/*
+
     it("should dispatch basket",
        inject([BasketService], (service: BasketService) => {
          let dispatchCount = 0;
@@ -193,22 +205,19 @@ describe("BasketService", () => {
 
          expect(dispatchCount).toEqual(2);
     }));
-*/
-/*
+
     it("should set the correct quantity on products already added to the basket",
       inject([BasketService], (service: BasketService) => {
         service.addItem(PRODUCT_1, 1);
         service.addItem(PRODUCT_1, 3);
 
         service.get()
-          .subscribe((basket) => {
-            console.log("AAA: "); 
-            console.log(basket.items[0].quantity);
+          .subscribe((basket) => { 
             expect(basket.items[0].quantity).toEqual(4);
           });
     }));
-*/
- // }); 
+
+ }); 
 
   describe("totals calculation", () => {
 
@@ -230,7 +239,7 @@ describe("BasketService", () => {
 
         service.get()
           .subscribe((basket) => {
-            expect(basket.items.length).toEqual(4); 
+            expect(basket.items.length).toEqual(3); 
             expect(basket.itemsTotal).toEqual((PRODUCT_1.price * 2) + PRODUCT_2.price + PRODUCT_3.price);
           });
     }));

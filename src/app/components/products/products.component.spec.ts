@@ -38,7 +38,7 @@ PRODUCT_3.price = 1.30;
 
 // tslint:disable-next-line:max-classes-per-file
 class MockProductDataService extends DataService {
-  public all(): Observable<Product[]> {
+  public getProducts(): Observable<Product[]> {
     return Observable.from([[PRODUCT_1, PRODUCT_2, PRODUCT_3]]);
   }
 }
@@ -143,13 +143,13 @@ describe('ProductsComponent', () => {
     expect(compiled.querySelector('button.mat-warn').textContent).toContain('Empty Basket');
   });
   
-  it("should display all products - count: expect 4", async(() => { 
+  it("should display all products - count: expect 3", async(() => { 
     fixture.detectChanges(); 
 
     const compiled = fixture.debugElement.nativeElement;
     const productElements = compiled.querySelectorAll(".product-card"); 
     
-    expect(productElements.length).toEqual(4); 
+    expect(productElements.length).toEqual(3); 
   }));
   
   it("should display all products - check content: name, price", async(() => { 
@@ -169,7 +169,6 @@ describe('ProductsComponent', () => {
 
   }));
   
-  /*
   it("should add product to basket upon click on add item button",
     async(inject([BasketService], (service: MockBasketService) => {
       const fixture = TestBed.createComponent(ProductsComponent);
@@ -179,15 +178,17 @@ describe('ProductsComponent', () => {
       const addItemSpy = sinon.spy(service, "addItem"); 
 
       const compiled = fixture.debugElement.nativeElement;
-      const productElements = compiled.querySelector("#products");
+      const productElements = compiled.querySelector("#products"); 
 
-      console.log(productElements);
-      console.log(compiled.querySelectorAll(".product-card"));
+      productElements.querySelectorAll("button.mat-primary")[0].click();  
 
-      productElements.querySelectorAll("button.mat-primary")[0].click();
+      (done: DoneFn) => {
+        sinon.assert.calledOnce(addItemSpy); 
 
-      sinon.assert.calledOnce(addItemSpy);
-      sinon.assert.calledWithExactly(addItemSpy, PRODUCT_1, 1);
+        sinon.assert.calledWithExactly(addItemSpy, PRODUCT_1, 1);
+
+        done();
+      }
   })));
-  */
+  
 });
