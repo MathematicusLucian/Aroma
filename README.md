@@ -13,13 +13,13 @@ Angular 8 shopping basket app.
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Home
-![mps_m](./readme_imgs/products_route.png)
+![products_route](./readme_imgs/products_route.png)
 
 ## /basket
-![mps_m](./readme_imgs/basket_route.png)
+![basket_route](./readme_imgs/basket_route.png)
 
 # Tests
-![mps_m](./readme_imgs/tests.png)
+![tests](./readme_imgs/tests.png)
 
 ## Running unit tests
 
