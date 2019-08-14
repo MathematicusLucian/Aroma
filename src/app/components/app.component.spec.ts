@@ -25,7 +25,7 @@ describe('AppComponent', () => {
   it(`should have as title 'shopping-basket-multi-currency'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('Corner Shop');
+    expect(app.title).toEqual('Y Siop Fach');
   });
 
   it('should render title in a span tag', () => {

@@ -4,6 +4,7 @@ Angular 8 shopping basket app.
 - Generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
 - RxJS Observables
 - Immutable basket. Local storage of basket contents
+- API call for exchange rates, with error handler  
 - Calls exchange rates API for multi-currency option
 - Google Material and Font Awesome styling. SCSS
 - Unit tests: Karma (runner), Jasmine (framework), SinonJS (mocking), e2e
@@ -29,7 +30,7 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## Unit test details
 
-37 specs, 0 failures, randomized with seed 43005
+37 specs, 0 failures
 
 BasketService  
 - should be injectable  
