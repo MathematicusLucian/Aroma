@@ -3,9 +3,11 @@ import { Injectable } from '@angular/core';
 /** rxjs */
 import { map } from 'rxjs/operators'; 
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs'; 
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 /** models */
 import { Product } from "../models/product.model"; 
@@ -39,8 +41,7 @@ export class DataService extends CachingService {
       () => this.http
         .get("./assets/json/products.json")
           //map the response as per the Product model
-          .pipe(map((response) => response as Product[] || [])
-        )
+          .pipe(map((response) => response as Product[] || []))
     );
 
   }
@@ -51,7 +52,14 @@ export class DataService extends CachingService {
 
     return this.http
       .get<any>(this.apiUrl + "latest?base=GBP")
-      .pipe(map(data => data)); 
+      .pipe(map(data => data))
+      .catch(this.errorHandler); 
 
   } 
+
+  //error handler for api call
+  private errorHandler(error: HttpErrorResponse){
+    return Observable.throw(error.message) || "Server error";
+  }
+
 }

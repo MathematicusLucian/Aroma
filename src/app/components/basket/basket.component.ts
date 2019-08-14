@@ -32,7 +32,7 @@ export class BasketComponent implements OnInit, OnDestroy {
   private exchangeRate: any;  
   public allCurrencies: any = [];
   public currency: any;  
-  private errorMessage: any; 
+  public errorMessage: any; 
 
   constructor(private data: DataService, private basketService: BasketService) { 
     
@@ -59,7 +59,9 @@ export class BasketComponent implements OnInit, OnDestroy {
           i++;
       }); 
 
-    });   
+    },
+    error => this.errorMessage = error
+    );   
   }
  
   ngOnInit(): void { 
@@ -129,12 +131,6 @@ export class BasketComponent implements OnInit, OnDestroy {
     
     } 
 
-  }
-
-  //error handler for api call
-  private handleError(invoker, error) {
-    console.error(`[BasketComponent.${invoker}] : ERROR : ${error}`);
-    this.errorMessage  = "ERROR : ${error}`";
   } 
 
 }
