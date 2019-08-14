@@ -9,11 +9,11 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$shopping-basket-app-primary: mat-palette($mat-green); 
-$shopping-basket-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$shopping-basket-app-primary: mat-palette($mat-amber, 500);
+$shopping-basket-app-accent: mat-palette($mat-pink, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
-$shopping-basket-app-warn:  mat-palette($mat-red);
+$shopping-basket-app-warn:  mat-palette($mat-red, A700);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $shopping-basket-app-theme: mat-light-theme($shopping-basket-app-primary, $shopping-basket-app-accent, $shopping-basket-app-warn);
@@ -23,9 +23,14 @@ $shopping-basket-app-theme: mat-light-theme($shopping-basket-app-primary, $shopp
 // that you are using.
 @include angular-material-theme($shopping-basket-app-theme);
 
-.mat-toolbar.mat-primary,
-.mat-raised-button.mat-primary{ 
+.mat-toolbar.mat-primary{
     color: #fff;
+}
+.mat-raised-button{
+    font-size: 1.1em;
+}
+.mat-raised-button.mat-primary{ 
+    color: #263238;
 }
 .mat-raised-button.mat-primary {
     height: 60px;
